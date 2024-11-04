@@ -15,7 +15,7 @@ string trim(const string &str) {
     return (first == string::npos || last == string::npos) ? "" : str.substr(first, last - first + 1);
 }
 
-class Grammar {
+class CFG {
 public:
     map<char, vector<string>> productions; // Stores productions for each non-terminal
     map<char, set<char>> firstSets;        // First sets for each non-terminal
@@ -144,12 +144,5 @@ public:
         }
     }
 
-    void initialize_production(const string &filename){
-        loadFromFile(filename); 
-        computeFirst();
-        computeFollow(); 
-        // printFirst();
-        // printFollow(); 
-    }
 
 };

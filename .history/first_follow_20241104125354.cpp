@@ -144,12 +144,12 @@ public:
         }
     }
 
+
     void initialize_production(const string &filename){
-        loadFromFile(filename); 
+        loadFromFile(&filename); 
         computeFirst();
         computeFollow(); 
-        // printFirst();
-        // printFollow(); 
+
     }
 
 };

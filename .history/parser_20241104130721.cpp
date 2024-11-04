@@ -3,6 +3,6 @@
 
 int main(){
     Grammar grammar; 
-    grammar.initialize_production("CFG.txt");
+    grammar.intialize_production("CFG.txt");
     return 0; 
 }

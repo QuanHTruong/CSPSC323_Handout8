@@ -4,5 +4,6 @@
 int main(){
     Grammar grammar; 
     grammar.initialize_production("CFG.txt");
+    printf((string)grammar.firstSets)
     return 0; 
 }

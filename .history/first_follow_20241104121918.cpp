@@ -21,6 +21,10 @@ public:
     map<char, set<char>> firstSets;        // First sets for each non-terminal
     map<char, set<char>> followSets;       // Follow sets for each non-terminal
 
+    void addProduction(char nonTerminal, const string &production) {
+        productions[nonTerminal].push_back(production);
+    }
+
     void loadFromFile(const string &filename) {
         ifstream file(filename);
         if (!file) {
@@ -34,7 +38,7 @@ public:
             
             char nonTerminal = line[0];
             string production = trim(line.substr(3)); // Skip "->" and trim any surrounding whitespace
-            productions[nonTerminal].push_back(production);
+            addProduction(nonTerminal, production);
         }
         file.close();
     }
@@ -55,12 +59,12 @@ public:
     void computeFirst() {
         bool updated;// boolean flag to keep the loop to find all first set for all non - terminal
         do {
-            updated = false; //initialize this as false
-            for (auto &[nonTerminal, rules] : productions) { //first loop wheere its loop through each line of CFG
-                for (const string &rule : rules) { // second loop for each line of the CFG
-                    for (int i = 0; i < rule.length(); i++) { // third loop to go through each symbols, exaple E->E+T; it loops through E,+,T
+            updated = false;
+            for (auto &[nonTerminal, rules] : productions) {
+                for (const string &rule : rules) {
+                    for (int i = 0; i < rule.length(); i++) {
                         char symbol = rule[i];
-                        if (isupper(symbol)) { // Non-terminal 
+                        if (isupper(symbol)) { // Non-terminal
                             for (char ch : firstSets[symbol]) {
                                 if (firstSets[nonTerminal].insert(ch).second) updated = true;
                             }
@@ -144,12 +148,17 @@ public:
         }
     }
 
-    void initialize_production(const string &filename){
-        loadFromFile(filename); 
-        computeFirst();
-        computeFollow(); 
-        // printFirst();
-        // printFollow(); 
-    }
 
 };
+
+int main() {
+    Grammar grammar;
+    grammar.loadFromFile("CFG.txt");  // Load CFG from file
+    grammar.computeFirst();
+    grammar.computeFollow();
+
+    grammar.printFirst();
+    grammar.printFollow();
+
+    return 0;
+}
