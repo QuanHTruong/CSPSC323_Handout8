@@ -38,8 +38,13 @@ public:
         }
         file.close();
     }
+    //Productions recorded 
+    // {'E', {"E+T", "E-T", "T"}},
+    // {'T', {"T*F", "T/F", "F"}},
+    // {'F', {"(E)", "i"}}
 
     // function to print out productions gotten from text file 
+
     // void printProductions() const {
     //     cout << "Productions:\n";
     //     for (const auto &[nonTerminal, rules] : productions) {
@@ -85,7 +90,7 @@ public:
                 for (const string &rule : rules) {
                     for (int i = 0; i < rule.length(); i++) {
                         char symbol = rule[i];
-                        if (isupper(symbol)) { // Only for non-terminals
+                        if (isupper(symbol)) { // Only for non-terminals, it is checking if symbol is an uppercase letter
                             set<char> tempFollow;
                             bool allEpsilon = true;
 
