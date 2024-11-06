@@ -153,8 +153,8 @@ public:
         loadFromFile(filename); 
         computeFirst();
         computeFollow(); 
-        printFirst();
-        printFollow(); 
+        // printFirst();
+        // printFollow(); 
     }
 
 };
